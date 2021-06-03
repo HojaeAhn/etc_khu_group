@@ -301,9 +301,9 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         plt.ylabel('Signal-to-Noise',fontsize=15)
         plt.legend(['Blue_LR', 'Green_LR', 'Red_LR', 'NIR_LR'], fontsize=15)
 
-        locs, labels = xticks()
+        locs, labels = plt.xticks()
         plt.setp(labels, 'fontsize', 'large')
-        locs, labels = yticks()
+        locs, labels = plt.yticks()
         plt.setp(labels,'fontsize', 'large')
 
         ax.set_yscale('log')
@@ -338,9 +338,9 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         plt.ylabel('Signal-to-Noise', fontsize=15)
         plt.legend(['Blue_MR', 'Green_MR', 'Red_MR', 'NIR_MR'], fontsize=15)
 
-        locs, labels = xticks()
+        locs, labels = plt.xticks()
         plt.setp(labels, 'fontsize', 'large')
-        locs, labels = yticks()
+        locs, labels = plt.yticks()
         plt.setp(labels, 'fontsize', 'large')
 
         ax.set_yscale('log')
@@ -375,9 +375,9 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         plt.ylabel('Signal-to-Noise', fontsize=15)
         plt.legend(['Blue_HR', 'Green_HR', 'Red_HR'], fontsize=15)
 
-        locs, labels = xticks()
+        locs, labels = plt.xticks()
         plt.setp(labels, 'fontsize', 'large')
-        locs, labels = yticks()
+        locs, labels = plt.yticks()
         plt.setp(labels, 'fontsize', 'large')
 
         ax.set_yscale('log')
