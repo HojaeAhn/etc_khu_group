@@ -8,6 +8,7 @@ Modification Log:
     * 2021.04.21 - Updated by Mingyoeng Yang
     * 2021.04.26 - Updated by Mingyeong Yang
     * 2021.05.18 - Updated by Changgon Kim
+    * 2021.06.03 - Updated by Hojae Ahn
 """
 
 from parameters import *
@@ -362,7 +363,7 @@ class Functions:
 
             else:
                 return x_iter
-        return -11  # Solution does not converge
+        return -999  # Solution does not converge
 
     def plot_sn_mag(self, res_mode, pwv, exp_t, exp_n, min_mag, max_mag, sky):
         self.tau_func.set_data(res_mode)
