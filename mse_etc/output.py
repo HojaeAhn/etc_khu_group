@@ -323,8 +323,6 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
 
-        plt.show()
-
     elif res_mode == "MR":
 
         print('Resolution Mode   = Moderate Resolution')
@@ -359,8 +357,6 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         ax.axis([min_mag, max_mag, 1, 1000])
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
-
-        plt.show()
 
     elif res_mode == "HR":
 
@@ -397,10 +393,10 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
 
-        plt.show()
-
     if gui.MainGUI.save:
        display_simple_text("Data file (%s.txt) is saved." % filename)
+
+    plt.show()
 
 def save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, result):
 
@@ -523,8 +519,6 @@ def display_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, 
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
 
-        plt.show()
-
     elif res_mode == "MR":
 
         print('Resolution Mode   = Moderate Resolution')
@@ -567,8 +561,6 @@ def display_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, 
         plt.xlim([min_wave, max_wave])
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
-
-        plt.show()
 
     elif res_mode == "HR":
 
@@ -613,10 +605,10 @@ def display_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, 
         ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
         ax.grid(color='k', linestyle='-', which='major', linewidth=1)
 
-        plt.show()
-
     if gui.MainGUI.save:
         display_simple_text("Data file (%s.txt) is saved." % filename)
+
+    plt.show()
 
 def save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max_wave, sn_arr, wave_arr):
 
