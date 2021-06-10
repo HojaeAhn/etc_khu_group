@@ -114,7 +114,7 @@ def save_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave):
         f1.write('Band\t Mag. \t Sky \t S/N\n')
         f1.write('[Blue]\t %.2f \t %.2f \t %f\n' % (mag[0], sky[0], data[0]))
         f1.write('[Green]\t %.2f \t %.2f \t %f\n' % (mag[1], sky[1], data[1]))
-        f1.write('[Red]\t %.2f \t %.2f \t %\n' % (mag[2], sky[2], data[2]))
+        f1.write('[Red]\t %.2f \t %.2f \t %f\n' % (mag[2], sky[2], data[2]))
         f1.write('[NIR]\t %.2f \t %.2f \t %f\n' % (mag[3], sky[3], data[3]))
         f1.write('[%.1f]\t %.2f \t %.2f \t %f \t (Band = %s)\n' % (wave, mag[4], sky[4], data[4], BAND_MR[4]))
 
@@ -444,7 +444,7 @@ def save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, r
         f1.write('PWV [mm]          = %.1f\n' % pwv)
         f1.write('Exposure Time [s] = %d\n' % exp_t)
         f1.write('Exposure Number   = %d\n' % exp_n)
-        f1.write('Magnitude Range [mag] : %.2f' % min_mag + ' - ' + '%.2\n' % max_mag)
+        f1.write('Magnitude Range [mag] : %.2f' % min_mag + ' - ' + '%.2f\n' % max_mag)
         f1.write('\n')
         f1.write('Band\t Sky\n')
         f1.write('[Blue]\t %.2f\n' % (sky[0]))
@@ -613,130 +613,114 @@ def save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max
     f1.write('\n')
 
     if res_mode == "LR":
-        print('Resolution Mode   = Low Resolution\n')
-        print('PWV [mm]          = %.1f\n' % pwv)
-        print('Exposure Time [s] = %d\n' % exp_t)
-        print('Exposure Number   = %d\n' % exp_n)
-        print('Magnitude = %.2f\n' % mag)
-        print('Sky = %.2f\n' % sky)
-        print('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f\n' % max_wave)
-        print('\n')
+        f1.write('Resolution Mode   = Low Resolution\n')
+        f1.write('PWV [mm]          = %.1f\n' % pwv)
+        f1.write('Exposure Time [s] = %d\n' % exp_t)
+        f1.write('Exposure Number   = %d\n' % exp_n)
+        f1.write('Magnitude = %.2f\n' % mag)
+        f1.write('Sky = %.2f\n' % sky)
+        f1.write('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f\n' % max_wave)
 
         f1.write('\n========== Plot data ===========\n')
 
 
         if wave_mode == "Input Wave":
             f1.write('1. Blue\n')
+            f1.write('Wavelength[nm]\tSNR\n')
             for i in range(len(wave_arr[0])):
                 f1.write('%.3f\t%.3f\n' % (wave_arr[0][i], sn_arr[0][i]))
 
             f1.write('\n2. Green\n')
+            f1.write('Wavelength[nm]\tSNR\n')
             for i in range(len(wave_arr[0])):
                 f1.write('%.3f\t%.3f\n' % (wave_arr[1][i], sn_arr[1][i]))
 
             f1.write('\n3. Red\n')
+            f1.write('Wavelength[nm]\tSNR\n')
             for i in range(len(wave_arr[0])):
                 f1.write('%.3f\t%.3f\n' % (wave_arr[2][i], sn_arr[2][i]))
 
             f1.write('\n4. NIR\n')
+            f1.write('Wavelength[nm]\tSNR\n')
             for i in range(len(wave_arr[0])):
                 f1.write('%.3f\t%.3f\n' % (wave_arr[3][i], sn_arr[3][i]))
 
         else:
+            f1.write('Wavelength[nm]\tSNR\n')
             for i in range(len(wave_arr)):
-                f1.write('Wavelength[nm]\tSNR\n')
                 f1.write('%.3f\t%.3f\n' % (wave_arr[i], sn_arr[i]))
 
 
     elif res_mode == "MR":
 
-        print('Resolution Mode   = Moderate Resolution')
-        print('PWV [mm]          = %.1f' % pwv)
-        print('Exposure Time [s] = %d' % exp_t)
-        print('Exposure Number   = %d' % exp_n)
-        print('Magnitude = %.2f' % mag)
-        print('Sky = %.2f' % sky)
-        print('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f' % max_wave)
-        print(' ')
+        f1.write('Resolution Mode   = Moderate Resolution\n')
+        f1.write('PWV [mm]          = %.1f\n' % pwv)
+        f1.write('Exposure Time [s] = %d\n' % exp_t)
+        f1.write('Exposure Number   = %d\n' % exp_n)
+        f1.write('Magnitude = %.2f\n' % mag)
+        f1.write('Sky = %.2f\n' % sky)
+        f1.write('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f\n' % max_wave)
 
-        plt.figure(num=None, figsize=(12, 8), dpi=80, facecolor='w', edgecolor='k')
-
-        ax = plt.subplot(111)
+        f1.write('\n========== Plot data ===========\n')
 
         if wave_mode == "Input Wave":
-            ax.plot(wave_arr[0], sn_arr[0], 'blue', linewidth=1, label='Blue')
-            ax.plot(wave_arr[1], sn_arr[1], 'green', linewidth=1, label='Green')
-            ax.plot(wave_arr[2], sn_arr[2], 'red', linewidth=1, label='Red')
-            ax.plot(wave_arr[3], sn_arr[3], 'black', linewidth=1, label='NIR')
+            f1.write('1. Blue\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[0][i], sn_arr[0][i]))
 
-            plt.legend(fontsize=15)
+            f1.write('\n2. Green\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[1][i], sn_arr[1][i]))
+
+            f1.write('\n3. Red\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[2][i], sn_arr[2][i]))
+
+            f1.write('\n4. NIR\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[3][i], sn_arr[3][i]))
+
         else:
-            ax.plot(wave_arr, sn_arr, 'black', linewidth=1)
-            plt.legend([wave_mode], fontsize=15)
-
-        plt.title('MSE-ETC' + ' ' + ini_etc_version + ' ' + '(pwv=' + '%.1f' % pwv + ', t=' + '%d' % exp_t + 's, N=' + '%d' % exp_n + ')',
-                  fontsize=16)
-        plt.xlabel('Wavelength', fontsize=15)
-        plt.ylabel('SNR', fontsize=15)
-
-        # plt.legend([wave_mode], fontsize=15)
-
-        locs, labels = xticks()
-        plt.setp(labels, 'fontsize', 'large')
-        locs, labels = yticks()
-        plt.setp(labels, 'fontsize', 'large')
-
-        # ax.set_yscale('log')
-        plt.xlim([min_wave, max_wave])
-        ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
-        ax.grid(color='k', linestyle='-', which='major', linewidth=1)
-
-        plt.show()
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr)):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[i], sn_arr[i]))
 
     elif res_mode == "HR":
 
-        print('Resolution Mode   = High Resolution')
-        print('PWV [mm]          = %.1f' % pwv)
-        print('Exposure Time [s] = %d' % exp_t)
-        print('Exposure Number   = %d' % exp_n)
-        print('Magnitude = %.2f' % mag)
-        print('Sky = %.2f' % sky)
-        print('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f' % max_wave)
-        print(' ')
+        f1.write('Resolution Mode   = High Resolution\n')
+        f1.write('PWV [mm]          = %.1f\n' % pwv)
+        f1.write('Exposure Time [s] = %d\n' % exp_t)
+        f1.write('Exposure Number   = %d\n' % exp_n)
+        f1.write('Magnitude = %.2f\n' % mag)
+        f1.write('Sky = %.2f\n' % sky)
+        f1.write('Calculated Wavelength Range [nm] : %.2f' % min_wave + ' - ' + '%.2f\n' % max_wave)
 
-        plt.figure(num=None, figsize=(12, 8), dpi=80, facecolor='w', edgecolor='k')
-
-        ax = plt.subplot(111)
+        f1.write('\n========== Plot data ===========\n')
 
         if wave_mode == "Input Wave":
-            ax.plot(wave_arr[0], sn_arr[0], 'blue', linewidth=1, label='Blue')
-            ax.plot(wave_arr[1], sn_arr[1], 'green', linewidth=1, label='Green')
-            ax.plot(wave_arr[2], sn_arr[2], 'red', linewidth=1, label='Red')
-            #ax.plot(wave_arr[3], sn_arr[3], 'black', linewidth=1, label='NIR')
+            f1.write('1. Blue\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[0][i], sn_arr[0][i]))
 
-            plt.legend(fontsize=15)
+            f1.write('\n2. Green\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[1][i], sn_arr[1][i]))
+
+            f1.write('\n3. Red\n')
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr[0])):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[2][i], sn_arr[2][i]))
+
         else:
-            ax.plot(wave_arr, sn_arr, 'black', linewidth=1)
-            plt.legend([wave_mode], fontsize=15)
-
-        plt.title('MSE-ETC' + ' ' + ini_etc_version + ' ' + '(pwv=' + '%.1f' % pwv + ', t=' + '%d' % exp_t + 's, N=' + '%d' % exp_n + ')',
-                  fontsize=16)
-        plt.xlabel('Wavelength', fontsize=15)
-        plt.ylabel('SNR', fontsize=15)
-
-        # plt.legend([wave_mode], fontsize=15)
-
-        locs, labels = xticks()
-        plt.setp(labels, 'fontsize', 'large')
-        locs, labels = yticks()
-        plt.setp(labels, 'fontsize', 'large')
-
-        # ax.set_yscale('log')
-        plt.xlim([min_wave, max_wave])
-        ax.grid(color='k', linestyle='-', which='minor', linewidth=0.5)
-        ax.grid(color='k', linestyle='-', which='major', linewidth=1)
-
-        plt.show()
+            f1.write('Wavelength[nm]\tSNR\n')
+            for i in range(len(wave_arr)):
+                f1.write('%.3f\t%.3f\n' % (wave_arr[i], sn_arr[i]))
 
     f1.close()
     display_simple_text("Data file (%s.txt) is saved." % filename)
