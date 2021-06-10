@@ -20,6 +20,9 @@ import time
 
 def display_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave):
 
+    if gui.MainGUI.save:
+        filename = save_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave)
+
     print('==========================================================================')
     print('The calculation Signal-to-Noise from single magnitude input')
     print(' ')
@@ -76,7 +79,8 @@ def display_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave):
             print('[%.1f]\t %.2f \t %.2f \t %f \t (Band = %s)' % (wave, mag[5], sky[5], data[5], BAND_HR[5]))
 
     if gui.MainGUI.save:
-        save_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave)
+        display_simple_text("Data file (%s.txt) is saved." % filename)
+
 
 def save_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave):
     now = time.localtime()
@@ -139,7 +143,8 @@ def save_single(res_mode, pwv, exp_t, exp_n, mag, sky, data, wave):
             f1.write('[%.1f]\t %.2f \t %.2f \t %f \t (Band = %s)\n' % (wave, mag[5], sky[5], data[5], BAND_HR[5]))
 
     f1.close()
-    display_simple_text("Data file (%s.txt) is saved." % filename)
+
+    return filename
 
 
 def display_simple_text(text):
@@ -148,6 +153,9 @@ def display_simple_text(text):
 
 
 def display_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave):
+
+    if gui.MainGUI.save:
+        filename = save_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave)
 
     print('==========================================================================')
     print('The calculation exposure time for target S/N')
@@ -205,7 +213,7 @@ def display_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave):
             print('[%.1f]\t %.2f \t %.2f \t %f \t (Band = %s)' % (wave, mag[5], sky[5], data[5], BAND_HR[5]))
 
     if gui.MainGUI.save:
-        save_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave)
+        display_simple_text("Data file (%s.txt) is saved." % filename)
 
 def save_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave):
     now = time.localtime()
@@ -268,9 +276,13 @@ def save_exp_time(res_mode, pwv, target_sn, mag, sky, data, wave):
             f1.write('[%.1f]\t %.2f \t %.2f \t %f \t (Band = %s)\n' % (wave, mag[5], sky[5], data[5], BAND_HR[5]))
 
     f1.close()
-    display_simple_text("Data file (%s.txt) is saved." % filename)
+    return filename
+
 
 def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, result):
+
+    if gui.MainGUI.save:
+        filename = save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, result)
 
     print('==========================================================================')
     print('The calculation Signal-to-Noise vs. Magnitude')
@@ -388,7 +400,7 @@ def display_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky
         plt.show()
 
     if gui.MainGUI.save:
-        save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, result)
+       display_simple_text("Data file (%s.txt) is saved." % filename)
 
 def save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, result):
 
@@ -457,9 +469,13 @@ def save_sn_mag(res_mode, pwv, exp_t, exp_n, min_mag, max_mag, mag_range, sky, r
         for i in range(len(mag_range)):
             f1.write('%.3f\t%.3f\t%.3f\t%.3f\n' % (mag_range[i],result[0][i],result[1][i],result[2][i]))
     f1.close()
-    display_simple_text("Data file (%s.txt) is saved." % filename)
+
+    return filename
 
 def display_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max_wave, sn_arr, wave_arr):
+
+    if gui.MainGUI.save:
+        filename = save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max_wave, sn_arr, wave_arr)
 
     print('==========================================================================')
     print('The calculation Signal-to-Noise vs. Wavelength')
@@ -600,7 +616,7 @@ def display_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, 
         plt.show()
 
     if gui.MainGUI.save:
-        save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max_wave, sn_arr, wave_arr)
+        display_simple_text("Data file (%s.txt) is saved." % filename)
 
 def save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max_wave, sn_arr, wave_arr):
 
@@ -723,4 +739,5 @@ def save_sn_wave(res_mode, wave_mode, pwv, exp_t, exp_n, mag, sky, min_wave, max
                 f1.write('%.3f\t%.3f\n' % (wave_arr[i], sn_arr[i]))
 
     f1.close()
-    display_simple_text("Data file (%s.txt) is saved." % filename)
+
+    return filename
